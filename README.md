@@ -44,7 +44,7 @@ GLOBAL OPTIONS:
 Take a screen capture.
 
 ```
-adbeem screencapture
+adbeem screencap
 ```
 
 Captures the screen of the connected device and outputs a png file to the execution path.

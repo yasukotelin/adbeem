@@ -16,12 +16,12 @@ func main() {
 		Commands: []*cli.Command{
 			{
 				Name:   "screencap",
-				Usage:  "capture screen",
+				Usage:  "capture the screen",
 				Action: cmd.Screencap,
 			},
 			{
 				Name:   "screenrecord",
-				Usage:  "records screen",
+				Usage:  "records the screen",
 				Action: cmd.Screenrecord,
 			},
 		},

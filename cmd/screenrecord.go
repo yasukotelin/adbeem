@@ -43,7 +43,7 @@ func Screenrecord(cli *cli.Context) error {
 		return err
 	}
 
-	fmt.Println("Screen recorded.")
+	fmt.Println("screenrecord is success")
 
 	return nil
 }

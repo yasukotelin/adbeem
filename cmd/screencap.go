@@ -40,7 +40,7 @@ func Screencap(cli *cli.Context) error {
 		return err
 	}
 
-	fmt.Println("Screen captured.")
+	fmt.Println("screencap is success.")
 
 	return nil
 }
