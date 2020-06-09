@@ -15,19 +15,9 @@ func Screenrecord(cli *cli.Context) error {
 		return errors.New("adb command not found")
 	}
 
-	devices, err := adb.GetDevices()
+	device, err := selectDeviceWithPrompt(adb)
 	if err != nil {
 		return err
-	}
-
-	var device string
-	if len(devices) > 1 {
-		device, err = selectDeviceWithPrompt(devices)
-		if err != nil {
-			return err
-		}
-	} else {
-		device = devices[0]
 	}
 
 	path, err := adb.Screenrecord(device)
