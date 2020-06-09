@@ -2,6 +2,11 @@
 
 adbeem is a CLI tool to capture or record the screen of Android with adb.
 
+## Requirement
+
+- [adb](https://developer.android.com/studio/command-line/adb)
+- go >= 13
+
 ## Features
 
 - Easy capture screen
@@ -9,6 +14,10 @@ adbeem is a CLI tool to capture or record the screen of Android with adb.
 - Multi devices. You can select a device with prompt ui.
 
 ## Install
+
+You need to install [adb](https://developer.android.com/studio/command-line/adb) before install adbeem.
+
+And you can install with go get.
 
 ```
 go get github.com/yasukotelin/adbeem
