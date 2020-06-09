@@ -2,8 +2,6 @@
 
 adbeem is a CLI tool to capture or record the screen of Android with adb.
 
-**NOTE** This tool is development.
-
 ## Features
 
 - Easy capture screen
