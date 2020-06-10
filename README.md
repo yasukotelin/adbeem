@@ -2,6 +2,8 @@
 
 adbeem is a CLI tool to capture or record the screen of Android with adb.
 
+![demo](./images/adbeem-demo.gif)
+
 ## Requirement
 
 - [adb](https://developer.android.com/studio/command-line/adb)
@@ -9,8 +11,10 @@ adbeem is a CLI tool to capture or record the screen of Android with adb.
 
 ## Features
 
-- Easy capture screen
-- Easy record screen
+- Easy capture screen（JPEG, PNG）
+- Easy record screen（MP4）
+- Device connected to the PC.
+- Emulator
 - Multi devices. You can select a device with prompt ui.
 
 ## Install
@@ -54,13 +58,24 @@ Take a screen capture.
 adbeem screencap
 ```
 
-Captures the screen of the connected device and outputs a png file to the execution path.
+If you use --output (or -o), you can specify output path.<br>
+Default output path is current directory and like this format `adbeem-20200611010217.png`.
+
+```
+adbeem screencap -o ~/Desktop/output.png
+```
+
+Records the screen on device.(Max 3 minute)
 
 ```
 adbeem screenrecord
 ```
 
-Records the screen of the connected device and outputs a mp4 file to the execution path.
+screenrecord command can also use --output flag.
+
+```
+adbeem screenrecord -o ~/Desctop/demo.mp4
+```
 
 ## Author
 

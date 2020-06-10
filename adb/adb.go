@@ -110,8 +110,14 @@ func getFileName() string {
 	return "adbeem-" + t.Format(layout)
 }
 
-func (adb *Adb) Pull(device string, path string) error {
-	cmd := exec.Command(adb.command, "-s", device, "pull", path)
+func (adb *Adb) Pull(device string, remote string, local string) error {
+	var cmd *exec.Cmd
+	if local == "" {
+		cmd = exec.Command(adb.command, "-s", device, "pull", remote)
+	} else {
+		cmd = exec.Command(adb.command, "-s", device, "pull", remote, local)
+	}
+
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 

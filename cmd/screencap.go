@@ -25,7 +25,8 @@ func Screencap(cli *cli.Context) error {
 		return err
 	}
 
-	if err := adb.Pull(device, path); err != nil {
+	output := cli.String("output")
+	if err := adb.Pull(device, path, output); err != nil {
 		return err
 	}
 
