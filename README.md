@@ -1,5 +1,7 @@
 # adbeem
 
+![version](https://img.shields.io/badge/version-1.0.0-brightgreen)
+
 adbeem is a CLI tool to capture or record the screen of Android with adb.
 
 ![demo](./images/adbeem-demo-2.gif)
