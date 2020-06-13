@@ -20,21 +20,42 @@ func Screenrecord(cli *cli.Context) error {
 		return err
 	}
 
-	path, err := adb.Screenrecord(device)
+	adb.Device = device
+
+	if err = screenRecord(cli, adb); err != nil {
+		return err
+	}
+
+	if cli.Bool("gif") {
+		convertToGif(cli)
+	}
+
+	return nil
+}
+
+func screenRecord(cli *cli.Context, adb *adb.Adb) error {
+	path, err := adb.Screenrecord()
 	if err != nil {
 		return err
 	}
 
 	output := cli.String("output")
-	if err := adb.Pull(device, path, output); err != nil {
+	if err := adb.Pull(path, output); err != nil {
 		return err
 	}
 
-	if err := adb.Rm(device, path); err != nil {
+	if err := adb.Rm(path); err != nil {
 		return err
 	}
 
 	fmt.Println("screenrecord is success")
 
+	return nil
+}
+
+func convertToGif(cli *cli.Context) error {
+	fmt.Println("Convert to gif...")
+
+	// TODO ffmpeg command check
 	return nil
 }

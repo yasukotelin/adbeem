@@ -11,17 +11,15 @@ import (
 )
 
 type Adb struct {
-	command string
+	Device string
 }
 
 func New() *Adb {
-	return &Adb{
-		command: "adb",
-	}
+	return &Adb{}
 }
 
 func (adb *Adb) ExistsCommand() bool {
-	cmd := exec.Command(adb.command, "--version")
+	cmd := exec.Command("adb", "--version")
 	cmd.Stderr = os.Stderr
 	if err := cmd.Run(); err != nil {
 		return false
@@ -30,7 +28,7 @@ func (adb *Adb) ExistsCommand() bool {
 }
 
 func (adb *Adb) GetDevices() ([]string, error) {
-	cmd := exec.Command(adb.command, "devices")
+	cmd := exec.Command("adb", "devices")
 	cmd.Stderr = os.Stderr
 
 	out, err := cmd.Output()
@@ -51,10 +49,10 @@ func (adb *Adb) GetDevices() ([]string, error) {
 	return devices, nil
 }
 
-func (adb *Adb) Screencap(device string) (string, error) {
+func (adb *Adb) Screencap() (string, error) {
 	path := "/sdcard/" + getFileName() + ".png"
 
-	cmd := exec.Command(adb.command, "-s", device, "shell", "screencap", path)
+	cmd := adb.newCmd("shell", "screencap", path)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 
@@ -65,11 +63,10 @@ func (adb *Adb) Screencap(device string) (string, error) {
 	return path, nil
 }
 
-func (adb *Adb) Screenrecord(device string) (string, error) {
+func (adb *Adb) Screenrecord() (string, error) {
 	path := "/sdcard/" + getFileName() + ".mp4"
 
-	cmd := exec.Command(adb.command, "-s", device, "shell", "screenrecord", path)
-
+	cmd := adb.newCmd("shell", "screenrecord", path)
 	if err := cmd.Start(); err != nil {
 		return "", err
 	}
@@ -89,7 +86,7 @@ func (adb *Adb) Screenrecord(device string) (string, error) {
 
 	// Wait to stop screenrecord process.
 	for {
-		rows, err := adb.PsTarget(device, "screenrecord")
+		rows, err := adb.PsTarget("screenrecord")
 		if err != nil {
 			return "", err
 		}
@@ -110,12 +107,12 @@ func getFileName() string {
 	return "adbeem-" + t.Format(layout)
 }
 
-func (adb *Adb) Pull(device string, remote string, local string) error {
+func (adb *Adb) Pull(remote string, local string) error {
 	var cmd *exec.Cmd
 	if local == "" {
-		cmd = exec.Command(adb.command, "-s", device, "pull", remote)
+		cmd = adb.newCmd("pull", remote)
 	} else {
-		cmd = exec.Command(adb.command, "-s", device, "pull", remote, local)
+		cmd = adb.newCmd("pull", remote, local)
 	}
 
 	cmd.Stdout = os.Stdout
@@ -128,15 +125,15 @@ func (adb *Adb) Pull(device string, remote string, local string) error {
 	return nil
 }
 
-func (adb *Adb) Rm(device, path string) error {
-	cmd := exec.Command(adb.command, "-s", device, "shell", "rm", path)
+func (adb *Adb) Rm(path string) error {
+	cmd := adb.newCmd("shell", "rm", path)
 	cmd.Stderr = os.Stderr
 
 	return cmd.Run()
 }
 
-func (adb *Adb) Ps(device string) ([]string, error) {
-	cmd := exec.Command(adb.command, "-s", device, "shell", "ps")
+func (adb *Adb) Ps() ([]string, error) {
+	cmd := adb.newCmd("shell", "ps")
 	cmd.Stderr = os.Stderr
 
 	out, err := cmd.Output()
@@ -152,8 +149,8 @@ func (adb *Adb) Ps(device string) ([]string, error) {
 	return rows, nil
 }
 
-func (adb *Adb) PsTarget(device string, target string) ([]string, error) {
-	psList, err := adb.Ps(device)
+func (adb *Adb) PsTarget(target string) ([]string, error) {
+	psList, err := adb.Ps()
 	if err != nil {
 		return nil, err
 	}
@@ -166,4 +163,14 @@ func (adb *Adb) PsTarget(device string, target string) ([]string, error) {
 	}
 
 	return result, nil
+}
+
+func (adb *Adb) newCmd(args ...string) *exec.Cmd {
+	arg := make([]string, 0, 10)
+	if adb.Device != "" {
+		arg = append(arg, "-s", adb.Device)
+	}
+	arg = append(arg, args...)
+
+	return exec.Command("adb", arg...)
 }
