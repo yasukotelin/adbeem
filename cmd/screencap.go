@@ -3,6 +3,7 @@ package cmd
 import (
 	"errors"
 	"fmt"
+	"path/filepath"
 
 	"github.com/urfave/cli/v2"
 	"github.com/yasukotelin/adbeem/adb"
@@ -22,13 +23,16 @@ func Screencap(cli *cli.Context) error {
 
 	adb.Device = device
 
-	path, err := adb.Screencap()
+	remote, err := adb.Screencap()
 	if err != nil {
 		return err
 	}
 
 	output := cli.String("output")
-	if err := adb.Pull(path, output); err != nil {
+	if output == "" {
+		output = filepath.Base(remote)
+	}
+	if err := adb.Pull(remote, output); err != nil {
 		return err
 	}
 

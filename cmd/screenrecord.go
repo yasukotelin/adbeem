@@ -3,9 +3,11 @@ package cmd
 import (
 	"errors"
 	"fmt"
+	"path/filepath"
 
 	"github.com/urfave/cli/v2"
 	"github.com/yasukotelin/adbeem/adb"
+	"github.com/yasukotelin/adbeem/ffmpeg"
 )
 
 func Screenrecord(cli *cli.Context) error {
@@ -22,40 +24,54 @@ func Screenrecord(cli *cli.Context) error {
 
 	adb.Device = device
 
-	if err = screenRecord(cli, adb); err != nil {
-		return err
-	}
-
-	if cli.Bool("gif") {
-		convertToGif(cli)
-	}
-
-	return nil
-}
-
-func screenRecord(cli *cli.Context, adb *adb.Adb) error {
-	path, err := adb.Screenrecord()
+	output, err := screenRecord(cli, adb)
 	if err != nil {
 		return err
 	}
 
-	output := cli.String("output")
-	if err := adb.Pull(path, output); err != nil {
-		return err
+	if cli.Bool("gif") {
+		convertToGif(cli, output)
 	}
-
-	if err := adb.Rm(path); err != nil {
-		return err
-	}
-
-	fmt.Println("screenrecord is success")
 
 	return nil
 }
 
-func convertToGif(cli *cli.Context) error {
+func screenRecord(cli *cli.Context, adb *adb.Adb) (string, error) {
+	remote, err := adb.Screenrecord()
+	if err != nil {
+		return "", err
+	}
+
+	output := cli.String("output")
+	if output == "" {
+		output = filepath.Base(remote)
+	}
+	if err := adb.Pull(remote, output); err != nil {
+		return "", err
+	}
+
+	if err := adb.Rm(remote); err != nil {
+		return "", err
+	}
+
+	fmt.Println("screenrecord is success")
+
+	return output, nil
+}
+
+func convertToGif(cli *cli.Context, input string) error {
 	fmt.Println("Convert to gif...")
 
-	// TODO ffmpeg command check
+	ffmpeg := &ffmpeg.Ffmpeg{
+		Input: input,
+	}
+
+	rate := cli.String("gifrate")
+	if err := ffmpeg.ConvToGif(rate); err != nil {
+		return err
+	}
+
+	fmt.Println("Successful gif conversion")
+
 	return nil
 }

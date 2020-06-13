@@ -72,7 +72,7 @@ func (adb *Adb) Screenrecord() (string, error) {
 	}
 
 	fmt.Println("Start recording...")
-	fmt.Print("(press any button to stop)")
+	fmt.Print("(press any button to stop) ")
 
 	go func() {
 		stdin := bufio.NewScanner(os.Stdin)
@@ -108,13 +108,7 @@ func getFileName() string {
 }
 
 func (adb *Adb) Pull(remote string, local string) error {
-	var cmd *exec.Cmd
-	if local == "" {
-		cmd = adb.newCmd("pull", remote)
-	} else {
-		cmd = adb.newCmd("pull", remote, local)
-	}
-
+	cmd := adb.newCmd("pull", remote, local)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 

@@ -41,6 +41,12 @@ func main() {
 						Aliases: []string{"g"},
 						Usage:   "convert to gif",
 					},
+					&cli.StringFlag{
+						Name:    "gifrate",
+						Aliases: []string{"gr"},
+						Value:   "15",
+						Usage:   "Gif rate",
+					},
 				},
 			},
 		},
