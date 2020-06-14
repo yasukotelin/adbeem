@@ -1,10 +1,23 @@
 # adbeem
 
-![version](https://img.shields.io/badge/version-1.0.0-brightgreen)
+![version](https://img.shields.io/badge/version-1.1.0-brightgreen)
+[![GoDoc](https://godoc.org/github.com/yasukotelin/adbeem?status.svg)](https://godoc.org/github.com/yasukotelin/adbeem)
+[![Go Report Card](https://goreportcard.com/badge/github.com/yasukotelin/adbeem)](https://goreportcard.com/report/github.com/yasukotelin/adbeem)
 
 adbeem is a CLI tool to capture or record the screen of Android with adb.
 
 ![demo](./images/adbeem-demo-2.gif)
+
+## Index
+
+* [Requirement](#requirement)
+* [Features](#features)
+* [Install](#install)
+* [Usage](#usage)
+  * [screencap](#screencap)
+  * [screenrecord](#screenrecord)
+    * [Convert to gif](#convert-to-gif)
+* [Author](#author)
 
 ## Requirement
 
