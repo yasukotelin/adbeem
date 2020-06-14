@@ -9,7 +9,10 @@ adbeem is a CLI tool to capture or record the screen of Android with adb.
 ## Requirement
 
 - [adb](https://developer.android.com/studio/command-line/adb)
-- go >= 13
+- [go](https://golang.org/doc/install) >= 13
+
+If you use to convert to gif from mp4 screen capture.
+- ffmpeg
 
 ## Features
 
@@ -23,7 +26,9 @@ adbeem is a CLI tool to capture or record the screen of Android with adb.
 
 You need to install [adb](https://developer.android.com/studio/command-line/adb) before install adbeem.
 
-And you can install with go get.
+If you use to convert to gif from mp4 screen capture, you need to install ffmpeg.
+
+And you can install adbeem with go get.
 
 ```
 go get github.com/yasukotelin/adbeem
@@ -54,7 +59,7 @@ GLOBAL OPTIONS:
    --version, -v  print the version (default: false)
 ```
 
-Take a screen capture.
+### screencap
 
 ```
 adbeem screencap
@@ -67,6 +72,8 @@ Default output path is current directory and like this format `adbeem-2020061101
 adbeem screencap -o ~/Desktop/output.png
 ```
 
+### screenrecord
+
 Records the screen on device.(Max 3 minute)
 
 ```
@@ -78,6 +85,24 @@ screenrecord command can also use --output flag.
 ```
 adbeem screenrecord -o ~/Desctop/demo.mp4
 ```
+
+#### Convert to gif
+
+If you want gif, you can use --gif(-g) option.
+
+```
+adbeem screenrecord -g
+```
+
+adbeem outputs mp4 and gif file.
+
+--gifrate(-gr), gif framerate option.
+
+```
+abdeem screenrecord -g -gr 30
+```
+
+default is 15 framerate.
 
 ## Author
 
