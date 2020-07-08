@@ -26,7 +26,7 @@ func (ffmpeg *Ffmpeg) ConvToGif(rate string) error {
 	if output == "" {
 		output = ffmpeg.createOutputFromInput()
 	}
-	cmd := exec.Command("ffmpeg", "-i", ffmpeg.Input, "-vf", "scale=iw*2/3:ih*2/3", "-r", rate, output)
+	cmd := exec.Command("ffmpeg", "-i", ffmpeg.Input, "-vf", "scale=400:-1", "-r", rate, output)
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
 
