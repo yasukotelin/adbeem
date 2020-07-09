@@ -12,7 +12,7 @@ func main() {
 	app := &cli.App{
 		Name:    "adbeem",
 		Usage:   "adbeem is a CLI tool to capture or record the screen of Android with adb",
-		Version: "1.1.0",
+		Version: "1.2.0",
 		Commands: []*cli.Command{
 			{
 				Name:   "screencap",
@@ -44,7 +44,7 @@ func main() {
 					&cli.StringFlag{
 						Name:    "gifrate",
 						Aliases: []string{"gr"},
-						Value:   "15",
+						Value:   "30",
 						Usage:   "Gif rate",
 					},
 				},
