@@ -12,7 +12,7 @@ func main() {
 	app := &cli.App{
 		Name:    "adbeem",
 		Usage:   "adbeem is a CLI tool to capture or record the screen of Android with adb",
-		Version: "1.1.0",
+		Version: "1.2.0",
 		Commands: []*cli.Command{
 			{
 				Name:   "screencap",
@@ -46,6 +46,19 @@ func main() {
 						Aliases: []string{"gr"},
 						Value:   "15",
 						Usage:   "Gif rate",
+					},
+				},
+			},
+			{
+				Name:   "deeplink",
+				Usage:  "send deeplink",
+				Action: cmd.DeepLink,
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:     "url",
+						Aliases:  []string{"u"},
+						Required: true,
+						Usage:    "deep link url",
 					},
 				},
 			},

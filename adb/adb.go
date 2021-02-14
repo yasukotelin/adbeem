@@ -159,6 +159,13 @@ func (adb *Adb) PsTarget(target string) ([]string, error) {
 	return result, nil
 }
 
+func (adb *Adb) SendDeepLink(url string) error {
+	cmd := adb.newCmd("shell", "am", "start", "-a", "android.intent.action.VIEW", "-d", url)
+	cmd.Stderr = os.Stderr
+
+	return cmd.Run()
+}
+
 func (adb *Adb) newCmd(args ...string) *exec.Cmd {
 	arg := make([]string, 0, 10)
 	if adb.Device != "" {
