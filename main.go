@@ -49,6 +49,19 @@ func main() {
 					},
 				},
 			},
+			{
+				Name:   "deeplink",
+				Usage:  "send deeplink",
+				Action: cmd.DeepLink,
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:     "url",
+						Aliases:  []string{"u"},
+						Required: true,
+						Usage:    "deep link url",
+					},
+				},
+			},
 		},
 		Action: cli.ShowAppHelp,
 	}
