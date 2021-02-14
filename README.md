@@ -4,9 +4,7 @@
 [![GoDoc](https://godoc.org/github.com/yasukotelin/adbeem?status.svg)](https://godoc.org/github.com/yasukotelin/adbeem)
 [![Go Report Card](https://goreportcard.com/badge/github.com/yasukotelin/adbeem)](https://goreportcard.com/report/github.com/yasukotelin/adbeem)
 
-adbeem is a CLI tool to capture or record the screen of Android with adb.
-
-![demo](./images/adbeem-demo-2.gif)
+adbeem is a CLI tool using Android "adb" command more easily.
 
 ## Index
 
@@ -17,6 +15,7 @@ adbeem is a CLI tool to capture or record the screen of Android with adb.
   * [screencap](#screencap)
   * [screenrecord](#screenrecord)
     * [Convert to gif](#convert-to-gif)
+  * [deeplink](#deeplink)
 * [Author](#author)
 
 ## Requirement
@@ -29,11 +28,11 @@ If you use to convert to gif from mp4 screen capture.
 
 ## Features
 
-- Easy capture screen（JPEG, PNG）
-- Easy record screen（MP4）
-- Device connected to the PC.
-- Emulator
-- Multi devices. You can select a device with prompt ui.
+- Easy capture screen（JPEG, PNG）.
+- Easy record screen（MP4）.
+- Easy send deep link to device.
+
+Multi devices. You can select a device with prompt ui.
 
 ## Install
 
@@ -52,7 +51,7 @@ go get github.com/yasukotelin/adbeem
 Show help.
 
 ```
-$ adbeem
+$ adbeem --help
 NAME:
    adbeem - adbeem is a CLI tool to capture or record the screen of Android with adb
 
@@ -60,11 +59,12 @@ USAGE:
    adbeem [global options] command [command options] [arguments...]
 
 VERSION:
-   0.1.0
+   1.2.0
 
 COMMANDS:
-   screencap     capture screen
-   screenrecord  records screen
+   screencap     capture the screen
+   screenrecord  records the screen
+   deeplink      send deeplink
    help, h       Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
@@ -116,6 +116,14 @@ abdeem screenrecord -g -gr 30
 ```
 
 default is 15 framerate.
+
+### deeplink
+
+Send deep link to connected device.
+
+```
+adbeem deeplink -u https://github.com
+```
 
 ## Author
 
