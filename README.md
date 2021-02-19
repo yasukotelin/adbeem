@@ -1,6 +1,6 @@
 # adbeem
 
-![version](https://img.shields.io/badge/version-1.2.0-brightgreen)
+![version](https://img.shields.io/badge/version-1.3.0-brightgreen)
 [![GoDoc](https://godoc.org/github.com/yasukotelin/adbeem?status.svg)](https://godoc.org/github.com/yasukotelin/adbeem)
 [![Go Report Card](https://goreportcard.com/badge/github.com/yasukotelin/adbeem)](https://goreportcard.com/report/github.com/yasukotelin/adbeem)
 
