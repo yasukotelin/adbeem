@@ -12,7 +12,7 @@ func main() {
 	app := &cli.App{
 		Name:    "adbeem",
 		Usage:   "adbeem is a CLI tool to capture or record the screen of Android with adb",
-		Version: "1.2.0",
+		Version: "1.3.0",
 		Commands: []*cli.Command{
 			{
 				Name:   "screencap",
@@ -58,7 +58,7 @@ func main() {
 						Name:     "url",
 						Aliases:  []string{"u"},
 						Required: true,
-						Usage:    "deep link url",
+						Usage:    "deep link url. (ex. \"example://app\")",
 					},
 				},
 			},

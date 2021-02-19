@@ -160,7 +160,7 @@ func (adb *Adb) PsTarget(target string) ([]string, error) {
 }
 
 func (adb *Adb) SendDeepLink(url string) error {
-	cmd := adb.newCmd("shell", "am", "start", "-a", "android.intent.action.VIEW", "-d", url)
+	cmd := adb.newCmd("shell", "am", "start", "-W", "-a", "android.intent.action.VIEW", "-d", url)
 	cmd.Stderr = os.Stderr
 
 	return cmd.Run()

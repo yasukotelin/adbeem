@@ -11,6 +11,7 @@ adbeem is a CLI tool using Android "adb" command more easily.
 * [Requirement](#requirement)
 * [Features](#features)
 * [Install](#install)
+* [Update](#update)
 * [Usage](#usage)
   * [screencap](#screencap)
   * [screenrecord](#screenrecord)
@@ -44,6 +45,12 @@ And you can install adbeem with go get.
 
 ```
 go get github.com/yasukotelin/adbeem
+```
+
+## Update
+
+```
+go get -u github.com/yasukotelin/adbeem
 ```
 
 ## Usage
@@ -122,7 +129,7 @@ default is 15 framerate.
 Send deep link to connected device.
 
 ```
-adbeem deeplink -u https://github.com
+adbeem deeplink -u "https://github.com"
 ```
 
 ## Author
