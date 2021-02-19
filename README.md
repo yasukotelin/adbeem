@@ -122,7 +122,7 @@ default is 15 framerate.
 Send deep link to connected device.
 
 ```
-adbeem deeplink -u https://github.com
+adbeem deeplink -u "https://github.com"
 ```
 
 ## Author
