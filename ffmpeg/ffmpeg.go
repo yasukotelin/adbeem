@@ -21,12 +21,12 @@ func (ffmpeg *Ffmpeg) ExistsCommand() bool {
 	return true
 }
 
-func (ffmpeg *Ffmpeg) ConvToGif(rate string) error {
+func (ffmpeg *Ffmpeg) ConvToGif(fps string) error {
 	output := ffmpeg.Output
 	if output == "" {
 		output = ffmpeg.createOutputFromInput()
 	}
-	cmd := exec.Command("ffmpeg", "-i", ffmpeg.Input, "-vf", "scale=400:-1", "-r", rate, output)
+	cmd := exec.Command("ffmpeg", "-i", ffmpeg.Input, "-vf", "[0:v] fps="+fps+",scale=320:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse", output)
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
 
