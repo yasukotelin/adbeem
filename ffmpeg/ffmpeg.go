@@ -21,12 +21,20 @@ func (ffmpeg *Ffmpeg) ExistsCommand() bool {
 	return true
 }
 
-func (ffmpeg *Ffmpeg) ConvToGif(fps string) error {
+func (ffmpeg *Ffmpeg) ConvToGif(quality string, fps string) error {
 	output := ffmpeg.Output
 	if output == "" {
 		output = ffmpeg.createOutputFromInput()
 	}
-	cmd := exec.Command("ffmpeg", "-i", ffmpeg.Input, "-vf", "[0:v] fps="+fps+",scale=320:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse", output)
+
+	var cmd *exec.Cmd
+	switch quality {
+	case "middle":
+		cmd = exec.Command("ffmpeg", "-i", ffmpeg.Input, "-vf", "fps="+fps+",scale=320:-1", output)
+	case "high":
+		cmd = exec.Command("ffmpeg", "-i", ffmpeg.Input, "-vf", "[0:v] fps="+fps+",scale=320:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse", output)
+	}
+
 	cmd.Stderr = os.Stderr
 	cmd.Stdout = os.Stdout
 
