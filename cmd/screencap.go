@@ -35,6 +35,9 @@ func Screencap(cli *cli.Context) error {
 	if err := adb.Pull(remote, output); err != nil {
 		return err
 	}
+	if err := adb.Rm(remote); err != nil {
+		return err
+	}
 
 	fmt.Println("screencap is success.")
 
