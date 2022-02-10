@@ -68,9 +68,10 @@ func convertToGif(cli *cli.Context, input string) error {
 
 	quality := cli.String("gif-quality")
 	fps := cli.String("fps")
+	size := cli.String("gif-size")
 	orientation := cli.String("gif-orientation")
 
-	if err := ffmpeg.ConvToGif(quality, fps, orientation); err != nil {
+	if err := ffmpeg.ConvToGif(quality, fps, size, orientation); err != nil {
 		return err
 	}
 

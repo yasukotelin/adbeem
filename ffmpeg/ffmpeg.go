@@ -21,13 +21,11 @@ func (ffmpeg *Ffmpeg) ExistsCommand() bool {
 	return true
 }
 
-func (ffmpeg *Ffmpeg) ConvToGif(quality string, fps string, orientation string) error {
+func (ffmpeg *Ffmpeg) ConvToGif(quality string, fps string, size string, orientation string) error {
 	output := ffmpeg.Output
 	if output == "" {
 		output = ffmpeg.createOutputFromInput()
 	}
-
-	size := "320"
 
 	var scale string
 	switch orientation {

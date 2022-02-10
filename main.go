@@ -48,6 +48,11 @@ func main() {
 						Value: "middle",
 					},
 					&cli.StringFlag{
+						Name:  "gif-size",
+						Usage: "Gif size (pixel).",
+						Value: "320",
+					},
+					&cli.StringFlag{
 						Name:  "gif-orientation",
 						Usage: "Gif orientation. portlait or landscape",
 						Value: "portlait",
