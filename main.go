@@ -15,9 +15,10 @@ func main() {
 		Version: "1.6.0",
 		Commands: []*cli.Command{
 			{
-				Name:   "screencap",
-				Usage:  "capture the screen",
-				Action: cmd.Screencap,
+				Name:    "screencap",
+				Aliases: []string{"screenshot"},
+				Usage:   "capture the screen",
+				Action:  cmd.Screencap,
 				Flags: []cli.Flag{
 					&cli.StringFlag{
 						Name:    "output",
