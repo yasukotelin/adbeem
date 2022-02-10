@@ -1,6 +1,6 @@
 # adbeem
 
-![version](https://img.shields.io/badge/version-1.6.0-brightgreen)
+![version](https://img.shields.io/badge/version-1.6.1-brightgreen)
 [![GoDoc](https://godoc.org/github.com/yasukotelin/adbeem?status.svg)](https://godoc.org/github.com/yasukotelin/adbeem)
 [![Go Report Card](https://goreportcard.com/badge/github.com/yasukotelin/adbeem)](https://goreportcard.com/report/github.com/yasukotelin/adbeem)
 
@@ -44,13 +44,7 @@ If you use to convert to gif from mp4 screen capture, you need to install ffmpeg
 And you can install adbeem with go get.
 
 ```
-go get github.com/yasukotelin/adbeem
-```
-
-## Update
-
-```
-go get -u github.com/yasukotelin/adbeem
+go install github.com/yasukotelin/adbeem@latest
 ```
 
 ## Usage

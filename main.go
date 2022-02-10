@@ -12,7 +12,7 @@ func main() {
 	app := &cli.App{
 		Name:    "adbeem",
 		Usage:   "adbeem is a CLI tool using Android adb command more easily.",
-		Version: "1.6.0",
+		Version: "1.6.1",
 		Commands: []*cli.Command{
 			{
 				Name:    "screencap",
