@@ -21,18 +21,28 @@ func (ffmpeg *Ffmpeg) ExistsCommand() bool {
 	return true
 }
 
-func (ffmpeg *Ffmpeg) ConvToGif(quality string, fps string) error {
+func (ffmpeg *Ffmpeg) ConvToGif(quality string, fps string, orientation string) error {
 	output := ffmpeg.Output
 	if output == "" {
 		output = ffmpeg.createOutputFromInput()
 	}
 
+	size := "320"
+
+	var scale string
+	switch orientation {
+	case "portlait":
+		scale = "scale=" + size + ":-1"
+	case "landscape":
+		scale = "scale=-1:" + size
+	}
+
 	var cmd *exec.Cmd
 	switch quality {
 	case "middle":
-		cmd = exec.Command("ffmpeg", "-i", ffmpeg.Input, "-vf", "fps="+fps+",scale=320:-1", output)
+		cmd = exec.Command("ffmpeg", "-i", ffmpeg.Input, "-vf", "fps="+fps+","+scale, output)
 	case "high":
-		cmd = exec.Command("ffmpeg", "-i", ffmpeg.Input, "-vf", "[0:v] fps="+fps+",scale=320:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse", output)
+		cmd = exec.Command("ffmpeg", "-i", ffmpeg.Input, "-vf", "[0:v] fps="+fps+","+scale+",split [a][b];[a] palettegen [p];[b][p] paletteuse", output)
 	}
 
 	cmd.Stderr = os.Stderr
