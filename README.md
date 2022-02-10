@@ -1,6 +1,6 @@
 # adbeem
 
-![version](https://img.shields.io/badge/version-1.5.1-brightgreen)
+![version](https://img.shields.io/badge/version-1.6.0-brightgreen)
 [![GoDoc](https://godoc.org/github.com/yasukotelin/adbeem?status.svg)](https://godoc.org/github.com/yasukotelin/adbeem)
 [![Go Report Card](https://goreportcard.com/badge/github.com/yasukotelin/adbeem)](https://goreportcard.com/report/github.com/yasukotelin/adbeem)
 
@@ -66,13 +66,13 @@ USAGE:
    adbeem [global options] command [command options] [arguments...]
 
 VERSION:
-   1.5.0
+   1.6.0
 
 COMMANDS:
-   screencap     capture the screen
-   screenrecord  records the screen
-   deeplink      send deeplink
-   help, h       Shows a list of commands or help for one command
+   screencap, screenshot  capture the screen
+   screenrecord           records the screen
+   deeplink               send deeplink
+   help, h                Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
    --help, -h     show help (default: false)
@@ -83,6 +83,8 @@ GLOBAL OPTIONS:
 
 ```
 adbeem screencap
+# or
+adbeem screenshot
 ```
 
 If you use --output (or -o), you can specify output path.<br>
@@ -124,13 +126,24 @@ If you use high option, output file is bigger than middle one.
 adbeem screenrecord -g --gif-quality high
 ```
 
---fps, gif fps option.
+--gif-size, gif size option. (default is 320)
+size is width pixel. If you use `--gif-orientation landscape`, size is height pixel.
 
 ```
-abdeem screenrecord -g --fps 30
+adbeem screenrecord -g --gif-size 800
 ```
 
-default is 20 fps.
+--gif-orientation, portlate or landscape. (default is portlait)
+
+```
+adbeem screenrecord -g --gif-orientation landscape
+```
+
+--gif-fps, gif fps option. (default is 20)
+
+```
+abdeem screenrecord -g --gif-fps 30
+```
 
 ### deeplink
 
