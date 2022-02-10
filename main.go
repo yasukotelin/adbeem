@@ -58,7 +58,7 @@ func main() {
 						Value: "portlait",
 					},
 					&cli.StringFlag{
-						Name:  "fps",
+						Name:  "gif-fps",
 						Value: "20",
 						Usage: "Gif fps",
 					},
